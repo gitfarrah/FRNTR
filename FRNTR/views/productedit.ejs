@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/cartsidebar.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+        
+        .sidebar a.dashboard {
+            background-color: black;
+            color: white;
+        }
+
+        .sidebar a:hover:not(.dashboard) {
+            background-color: #555;
+            color: white;
+        }
+       
+    </style>
+    <title>Admin Product Edit</title>
+</head>
+<body>
+    <div class="barpage">
+        <div class="sideCon">
+            <%- include("./partials/adminnav.ejs")%>
+            <div class="header"> <h2>Edit in Item</h2> </div>
+            <div class="gallery">
+                <div class="row">
+                    <div class="background">
+                        <div class="containerform">
+                            <!-- //////////////////update///////////////// -->
+                            <form class="form" action="/adminproduct/edit" method="post" onsubmit="return validateEditForm(event)" enctype="multipart/form-data">
+                                <div class="rowform">
+                                    <div class="col-25">
+                                        <label for="productname">Product Name</label>
+                                    </div>
+                                    <div class="col-75">
+                                        <input type="text" style="width: 100%;
+                                        padding: 12px;
+                                        border: 1px solid #ccc;
+                                        border-radius: 4px;
+                                        resize: vertical;" id="upproductname" name="upproductname"
+                                            placeholder="Enter the product name.." value="<%= product ? product.productName : '' %>">
+                                        <div id="nameid" class="err" ><% if (errors && errors.upproductname) { %>
+                                            <%= errors.upproductname %>
+                                          <% } %></div>
+                                    </div>
+                                </div>
+                                <div class="rowform">
+                                    <div class="col-25">
+                                        <label for="ID"> Product ID</label>
+                                    </div>
+                                    <div class="col-75">
+                                        <input type="text"style="width: 100%;
+                                        padding: 12px;
+                                        border: 1px solid #ccc;
+                                        border-radius: 4px;
+                                        resize: vertical;"  id="upID" name="upProductID" placeholder="Enter product ID.." value="<%= product ? product._id : '' %>">
+                                        <div id="upidid" class="err"><% if (errors && errors.upProductID) { %>
+                                            <%= errors.upProductID %>
+                                          <% } %></div>
+                                    </div>
+                                </div>
+                                <div class="rowform">
+                                    <div class="col-25">
+                                        <label for="category">Category</label>
+                                    </div>
+                                    <div class="col-75">
+                                        <select id="category" style="width: 100%;
+                                        padding: 12px;
+                                        border: 1px solid #ccc;
+                                        border-radius: 4px;
+                                        resize: vertical;" name="category">
+                                                <option value="armchair" <%= product && product.category === 'armchair' ? 'selected' : '' %>>Armchair</option>
+                                                <option value="beds" <%= product && product.category === 'beds' ? 'selected' : '' %>>Beds</option>
+                                                <option value="benches" <%= product && product.category === 'benches' ? 'selected' : '' %>>Benches</option>
+                                                <option value="beanbags" <%= product && product.category === 'beanbags' ? 'selected' : '' %>>Bean Bags</option>
+                                                <option value="chaise lounges" <%= product && product.category === 'chaise lounges' ? 'selected' : '' %>>Chaise Lounges</option>
+                                                <option value="living room set" <%= product && product.category === 'living room set' ? 'selected' : '' %>>Living Room Set</option>
+                                                <option value="kids furniture" <%= product && product.category === 'kids furniture' ? 'selected' : '' %>>Kids Furniture</option>
+                                                <option value="pets furniture" <%= product && product.category === 'pets furniture' ? 'selected' : '' %>>Pets Furniture</option>
+                                                <option value="space friendly" <%= product && product.category === 'space friendly' ? 'selected' : '' %>>Space Friendly</option>
+                                            
+                                            
+                                        </select>
+                                        <div id="catorgyid" class="err"></div>
+                                    </div>
+                                </div>
+                                <div class="rowform">
+                                    <div class="col-25">
+                                        <label for="subject">Choose diffrent color</label>
+                                    </div>
+                                    <div class="col-75">
+                                        <input id="color" name="colorpicker" type="text" value="<%= product ? product.color : '' %>">
+                                        <div id="colorid" class="err"><% if (errors && errors.color) { %>
+                                            <%= errors.color %>
+                                          <% } %></div>
+                                    </div>
+                                </div>
+                                <div class="rowform">
+                                    <div class="col-25">
+    
+                                        <label for="subject">Update the price</label>
+                                    </div>
+                                    <div class="col-75">
+                                        <input type="number" min="1" step="any" id="price" name="price"
+                                            placeholder="Decimals are accepted" value="<%= product ? product.price : '' %>">
+                                        <div id="priceid" class="err"><% if (errors && errors.price) { %>
+                                            <%= errors.price %>
+                                          <% } %></div>
+                                    </div>
+                                </div>
+                                <div class="rowform">
+                                    <div class="col-25">
+    
+                                        <label for="subject">Add an offer</label>
+                                    </div>
+                                    <div class="col-75">
+                                        <input type="number" min="1" step="any" id="price" name="price"
+                                            placeholder="Decimals are accepted" value="<%= product ? product.price : '' %>">
+                                        <div id="priceid" class="err"><% if (errors && errors.price) { %>
+                                            <%= errors.price %>
+                                          <% } %></div>
+                                    </div>
+                                </div>
+                                <div class="rowform">
+                                    <div class="col-25">
+    
+                                        <label for="subject">Update the quantity</label>
+                                    </div>
+                                    <div class="col-75">
+                                        <input type="number" min="1" id="quantity" name="quantity"
+                                            placeholder="Enter a whole posisitive number .."  value="<%= product ? product.quantity : '' %>">
+                                        <div id="quantityid" class="err"><% if (errors && errors.quantity) { %>
+                                            <%= errors.quantity %>
+                                          <% } %></div>
+                                    </div>
+                                </div>
+                                <div class="rowform">
+                                    <div class="col-25">
+                                      <label for="comments">Comments</label>
+                                    </div>
+                                    <div class="col-75">
+                                      <textarea id="comments" style="width: 100%;
+                                      padding: 12px;
+                                      border: 1px solid #ccc;
+                                      border-radius: 4px;
+                                      resize: vertical;" name="comments" placeholder="Leave any comments you have about the product..." style="height:200px"><% if (product && product.comments) { %><%= product.comments %><% } %>
+                                    </textarea>
+                                    </div>
+                                  </div>
+                                <div class="rowform">
+                                    <div class="col-25">
+    
+                                        <label for="subject">Update Photo of the product</label>
+                                    </div>
+                                    <div class="col-65">
+                                        <input type="file" id="photo" name="photo">
+                                    </div>
+                                    <div class="rowform">
+                                        <input type="submit" id="submitButton" value="Submit">
+                                    </div>
+                                    <div class="rowform">
+                                        <% if (typeof successMessage !== 'undefined' && successMessage) { %>
+                                          <p style="color: green"><%= successMessage %></p>
+                                        <% } %>
+                                        <% if (typeof failMessage !== 'undefined' && failMessage) { %>
+                                          <p style="color:red"><%= failMessage %></p>
+                                        <% } %>
+                                      </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+           <h3 id="subhead">Recently Edited</h3>
+            <div class="row">
+                <div class="content">
+                    <section class="hoveringimgs">
+                        <div class="box">
+                            <img src="../images/malia_5.webp" class="hoveredimg" alt="Avatar" style="width:100%">
+                            <img src="../images/malia_3.webp" alt="texture" class="hover_img" style="width:100%">
+                        </div>
+                        <div class="container">
+                            <h4><b>Malia Vanity Stool Chair</b></h4>
+                            <p>Hover function</p>
+                        </div>
+                    </section>
+                </div>
+                <div class="content">
+                    <section class="hoveringimgs">
+                        <div class="box">
+                            <img src="../images/NylaBabyBlue2.webp" class="hoveredimg" alt="Avatar" style="width:100%">
+                            <img src="../images/NylaBabyBlue3.webp" alt="texture" class="hover_img" style="width:100%">
+                        </div>
+                        <div class="container">
+                            <h4><b>Nyla Baby Blue</b></h4>
+                            <p>19200 EGP</p>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/admin.js"></script>
+
+</body>
+</html>

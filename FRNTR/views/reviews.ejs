@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="../css/admin.css" />
+    <link rel="stylesheet" href="../css/cartsidebar.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <style>
+      .sidebar a.review {
+        background-color: black;
+        color: white;
+      }
+
+      .sidebar a:hover:not(.review) {
+        background-color: #555;
+        color: white;
+      }
+  
+      .row {
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+    <title>Admin Reviews</title>
+  </head>
+  <body>
+    <%- include("./partials/adminsidebar.ejs")%>
+    <div class="contenty">
+      <%- include("./partials/adminnav.ejs")%>
+      <div class="sideCon">
+        <div class="header">
+          <h2>Reviews</h2>
+        </div>
+        <div class="gallery">
+          <div class="row">
+            <div class="fullrev">
+              <div class="content-z">
+                <div class="content-x">
+                  <img
+                    src="../images/woman.png"
+                    alt="Avatar"
+                    style="width: 100%"
+                  />
+                </div>
+                <div class="container-x">
+                  <h6>Janie Mourment</h6>
+                </div>
+              </div>
+              <div class="rev">
+                <div class="container-z">
+                  <p>Hello this product was amazing</p>
+                </div>
+              </div>
+            </div>
+            <div class="fullrev">
+              <div class="content-z">
+                <div class="content-x">
+                  <img
+                    src="../images/man (1).png"
+                    alt="Avatar"
+                    style="width: 100%"
+                  />
+                </div>
+                <div class="container-x">
+                  <h6>Will Graham</h6>
+                </div>
+              </div>
+              <div class="rev">
+                <div class="container-z">
+                  <p>Hello this product was amazing aktar</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

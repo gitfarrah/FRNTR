@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="../css/admin.css" />
+    <link rel="stylesheet" href="../css/cartsidebar.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <style>
+      
+      .sidebar a.customers {
+        background-color: black;
+        color: white;
+      }
+
+      .sidebar a:hover:not(.customers) {
+        background-color: #555;
+        color: white;
+      }
+     
+      .row {
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+    <title>Admin Users</title>
+  </head>
+  <body>
+    <%- include("./partials/adminsidebar.ejs")%>
+    <div class="contenty">
+      <%- include("./partials/adminnav.ejs")%>
+      <div class="sideCon">
+        <div class="header">
+          <h2>Registred Customers</h2>
+        </div>
+        <div class="gallery">
+          <div class="row">
+            <% Users.forEach((Users)=> {%>
+            <div class="fullrev">
+              <div class="content-z">
+                <div class="content-x">
+                  <img
+                    src="../images/user (1).png"
+                    alt="Avatar"
+                    style="width: 100%"
+                  />
+                </div>
+                <div class="container-x">
+                  <h6><%= Users.firstName%></h6>
+                </div>
+              </div>
+              <div class="rev">
+                <div class="container-z">
+                  <p><%= Users.email%>
+                  <br> <%= Users.userType%></p>
+                 <div class ="status">
+                  <p>
+                    <% if (Users.userType==='client' ){ %>
+                      <a class="btn btn-make-admin" href="/admin/beAdmin/<%= Users.id %>" onclick="return confirmChangeUserToAdmin('<%= Users.id %>')">Make Admin</a>
+                      <% } else{ %>
+                        <a class="btn btn-make-client" href="/admin/beClient/<%= Users.id %>" onclick="return confirmChangeUserToClient('<%= Users.id %>')">Make Client</a>
+                        <% } %>
+                  </p>
+                 </div>
+                </div>
+              </div>
+            </div>
+          <%})%>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="../js/admin.js"></script>
+  </body>
+</html>

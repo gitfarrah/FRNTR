@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/cartsidebar.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+        body {
+            margin: 0;
+            font-family: "Lato", sans-serif;
+        }
+
+        .sidebar a.offers {
+            background-color: black;
+            color: white;
+        }
+
+        .sidebar a:hover:not(.offers) {
+            background-color: #555;
+            color: white;
+        }
+        
+    </style>
+    <title>Admin Offers</title>
+</head>
+<body>
+<%- include("./partials/adminsidebar.ejs")%>
+<div class="contenty">
+    <%- include("./partials/adminnav.ejs")%>
+    <div class="sideCon">
+        
+        <div class="header">
+            <h2>Hot Offers</h2>
+        </div>
+       
+        <div class="gallery">
+            <% if (offers && offers.length > 0) { %>
+            <div class="row">
+                <% offers.forEach((product) => { %>
+                    <div class="content">
+                        <div class="product-image">
+                            <% if (product.imagePath && product.imagePath.length > 0) { %>
+                             <% product.imagePath.forEach((path) => { %>
+                                <img src="<%= path %>" class="pic-1" style="width: 100%" />
+                                <% console.log("hello Image from offer Path:", path); %>
+                                <img src="<%= path %>" class="pic-2" style="width: 100%" />
+                                  <% }); %>
+                                   <% } %>
+                        </div>
+                        <div class="container">
+                            <h4><b>" <%= product.productName %> " on SALE up to <%= product.offer%> %</b></h4>
+                             <p class="deals"><%= product.price %> EGP</p>
+                            <p>Now for ONLY <%= product.price -(product.price * (product.offer)/100) %> EGP</p>
+                        </div>
+                    </div>
+                <% }); %>
+                    
+              
+            </div>
+              <% } %>
+        </div>
+    </div>
+</div>
+</body>
+</html>
